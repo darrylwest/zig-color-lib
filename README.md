@@ -81,6 +81,7 @@ std.debug.print("{s}{s}Bold red warning{s}\n", .{
 ```
 
 Available codes:
+
 - **Colors**: `red`, `green`, `blue`, `yellow`, `cyan`, `magenta`, `white`, `black`
 - **Bright colors**: `bright_red`, `bright_green`, `bright_blue`, etc.
 - **Background**: `bg_red`, `bg_green`, `bg_blue`, etc.
@@ -212,3 +213,6 @@ Apache 2.0 - see [LICENSE](LICENSE) file for details.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit issues and pull requests.
+
+###### dpw | 2025.09.22
+
