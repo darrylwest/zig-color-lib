@@ -2,15 +2,12 @@ const std = @import("std");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
-<<<<<<< HEAD
     const optimize = b.standardOptimizeOption(.{});
-=======
     // For libraries, optimization is typically handled by the consumer
     // It's also possible to define more custom flags to toggle optional features
     // of this build script using `b.option()`. All defined flags (including
     // target and optimize options) will be listed when running `zig build --help`
     // in this directory.
->>>>>>> main
 
     // Create the library
     const lib = b.addStaticLibrary(.{
@@ -20,7 +17,6 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-<<<<<<< HEAD
     // Install the library
     b.installArtifact(lib);
 
@@ -69,7 +65,6 @@ pub fn build(b: *std.Build) void {
         .install_subdir = "docs",
     });
     docs_step.dependOn(&install_docs.step);
-=======
     // Creates a test executable that will run `test` blocks from the module.
     const mod_tests = b.addTest(.{
         .root_module = mod,
@@ -93,5 +88,4 @@ pub fn build(b: *std.Build) void {
     //
     // Lastly, the Zig build system is relatively simple and self-contained,
     // and reading its source code will allow you to master it.
->>>>>>> main
 }
