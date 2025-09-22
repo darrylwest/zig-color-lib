@@ -6,7 +6,10 @@
     .fingerprint = 0x5f9d91c83bbd8469,
 
     .dependencies = .{
-        // No external dependencies for this library
+        .zig_color = .{
+            .url = "https://github.com/darrylwest/zig-color-lib/archive/refs/tags/v0.2.1.tar.gz",
+            .hash = "zig_color-0.2.1-aYS9O2RwAABXEx_tnrTgEepCwTRvIbsmRcXTumarkW24",
+        },
     },
 
     .paths = .{
