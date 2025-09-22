@@ -6,7 +6,9 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    const stdout = std.io.getStdOut().writer();
+    var stdout_buffer: [1024]u8 = undefined;
+    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
+    const stdout = &stdout_writer.interface;
     const color_support = color.ColorSupport.init();
 
     // Method 1: Direct color codes
@@ -41,4 +43,7 @@ pub fn main() !void {
     // Demonstrate multiple styles
     try stdout.print("{s}{s}Bold Red Text{s}\n", .{ color.codes.bold, color.codes.red, color.codes.reset });
     try stdout.print("{s}{s}Underlined Cyan Text{s}\n", .{ color.codes.underline, color.codes.cyan, color.codes.reset });
+
+    // Flush the buffer to ensure all output is displayed
+    try stdout.flush();
 }

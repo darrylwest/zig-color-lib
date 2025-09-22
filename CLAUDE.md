@@ -14,7 +14,13 @@ The project follows standard Zig 0.15.1+ conventions with module-based architect
 
 - `zig build` - Build the library module
 - `zig build test` - Run library tests
+- `zig build example` - Build the color demonstration example
+- `zig build docs` - Generate documentation
 - `zig build --help` - Show all available build options and steps
+
+## Running Examples
+
+- `./zig-out/bin/color-example` - Run the color demonstration example
 
 ## Architecture
 

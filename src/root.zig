@@ -60,7 +60,8 @@ pub const ColorSupport = struct {
     /// Detect if color output is supported
     fn detectColorSupport() bool {
         // Check if we're on a TTY
-        if (!std.io.getStdOut().isTty()) {
+        const stdout_file = std.fs.File.stdout();
+        if (!stdout_file.isTty()) {
             return false;
         }
         
