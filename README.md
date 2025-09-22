@@ -1,5 +1,14 @@
 # Zig Color Library
 
+```
+ ______          ____      _              _     _ _     
+|__  (_) __ _   / ___|___ | | ___  _ __  | |   (_) |__  
+  / /| |/ _` | | |   / _ \| |/ _ \| '__| | |   | | '_ \ 
+ / /_| | (_| | | |__| (_) | | (_) | |    | |___| | |_) |
+/____|_|\__, |  \____\___/|_|\___/|_|    |_____|_|_.__/ 
+        |___/                                           
+```
+
 A simple, efficient ANSI color library for Zig console applications. This library provides easy-to-use functions for adding colors and text formatting to terminal output with intelligent color support detection.
 
 ## Features
@@ -171,9 +180,11 @@ Underlined Cyan Text   # (underlined cyan)
 ## API Reference
 
 ### `codes` namespace
+
 Contains all ANSI escape code constants as string literals.
 
 ### `simple` namespace
+
 - `red(text, allocator)` - Always returns red text
 - `green(text, allocator)` - Always returns green text
 - `blue(text, allocator)` - Always returns blue text
@@ -182,6 +193,7 @@ Contains all ANSI escape code constants as string literals.
 - `colorize(color_code, text, allocator)` - Custom color with any ANSI code
 
 ### `ColorSupport` struct
+
 - `init()` - Create with automatic color detection
 - `colorize(color_code, text, allocator)` - Conditionally colorize text
 - `red/green/blue/yellow/bold(text, allocator)` - Conditional color methods
