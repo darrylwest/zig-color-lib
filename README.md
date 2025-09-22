@@ -22,10 +22,10 @@ A simple, efficient ANSI color library for Zig console applications. This librar
 
 ## Quick Start
 
-Add this library to your Zig project using the package manager:
+Once this library is published to GitHub, add it to your Zig project using the package manager:
 
 ```bash
-zig fetch --save https://github.com/darrylwest/zig-color-lib
+zig fetch --save https://github.com/darrylwest/zig-color-lib/archive/refs/tags/v0.2.1.tar.gz
 ```
 
 Or add it manually to your `build.zig.zon`:
@@ -35,6 +35,16 @@ Or add it manually to your `build.zig.zon`:
     .zig_color = .{
         .url = "https://github.com/darrylwest/zig-color-lib/archive/refs/tags/v0.2.1.tar.gz",
         .hash = "1220...", // Use the hash provided by zig fetch
+    },
+},
+```
+
+For local development/testing, you can use a local path dependency:
+
+```zig
+.dependencies = .{
+    .zig_color = .{
+        .path = "../zig-color-lib", // Relative path to this library
     },
 },
 ```
