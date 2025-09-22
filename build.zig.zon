@@ -2,20 +2,17 @@
     .name = .zig_color,
     .version = "0.2.1",
     .description = "A simple ANSI color library for Zig console applications",
-    .author = "Darryl West",
-    .license = "Apache 2.0",
     .minimum_zig_version = "0.15.1",
-    .fingerprint = 0x5f9d91c8711ca5aa,
-    
+    .fingerprint = 0x5f9d91c83bbd8469,
+
     .dependencies = .{
         // No external dependencies for this library
     },
-    
+
     .paths = .{
         "build.zig",
         "build.zig.zon",
         "src",
-        "example",
         "README.md",
         "LICENSE",
     },

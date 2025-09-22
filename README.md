@@ -25,7 +25,29 @@ A simple, efficient ANSI color library for Zig console applications. This librar
 Add this library to your Zig project using the package manager:
 
 ```bash
-zig fetch --save https://github.com/your-username/zig-color
+zig fetch --save https://github.com/darrylwest/zig-color-lib
+```
+
+Or add it manually to your `build.zig.zon`:
+
+```zig
+.dependencies = .{
+    .zig_color = .{
+        .url = "https://github.com/darrylwest/zig-color-lib/archive/refs/tags/v0.2.1.tar.gz",
+        .hash = "1220...", // Use the hash provided by zig fetch
+    },
+},
+```
+
+Then in your `build.zig`, add the dependency:
+
+```zig
+const zig_color = b.dependency("zig_color", .{
+    .target = target,
+    .optimize = optimize,
+});
+
+exe.root_module.addImport("zig-color", zig_color.module("zig-color"));
 ```
 
 Then import and use in your code:

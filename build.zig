@@ -10,22 +10,26 @@ pub fn build(b: *std.Build) void {
         .target = target,
     });
 
-    // Example executable to demonstrate usage
-    const example = b.addExecutable(.{
-        .name = "color-example",
-        .root_module = b.createModule(.{
-            .root_source_file = b.path("example/main.zig"),
-            .target = target,
-            .optimize = optimize,
-            .imports = &.{
-                .{ .name = "zig-color", .module = color_module },
-            },
-        }),
-    });
+    // Example executable to demonstrate usage (only build if example directory exists)
+    if (std.fs.cwd().access("example", .{})) |_| {
+        const example = b.addExecutable(.{
+            .name = "color-example",
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("example/main.zig"),
+                .target = target,
+                .optimize = optimize,
+                .imports = &.{
+                    .{ .name = "zig-color", .module = color_module },
+                },
+            }),
+        });
 
-    const example_install = b.addInstallArtifact(example, .{});
-    const example_step = b.step("example", "Build and install the example");
-    example_step.dependOn(&example_install.step);
+        const example_install = b.addInstallArtifact(example, .{});
+        const example_step = b.step("example", "Build and install the example");
+        example_step.dependOn(&example_install.step);
+    } else |_| {
+        // Example directory doesn't exist, skip example build
+    }
 
     // Unit tests
     const unit_tests = b.addTest(.{
