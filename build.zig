@@ -1,54 +1,57 @@
 const std = @import("std");
 
-// Although this function looks imperative, it does not perform the build
-// directly and instead it mutates the build graph (`b`) that will be then
-// executed by an external runner. The functions in `std.Build` implement a DSL
-// for defining build steps and express dependencies between them, allowing the
-// build runner to parallelize the build automatically (and the cache system to
-// know when a step doesn't need to be re-run).
 pub fn build(b: *std.Build) void {
-    // Standard target options allow the person running `zig build` to choose
-    // what target to build for. Here we do not override the defaults, which
-    // means any target is allowed, and the default is native. Other options
-    // for restricting supported target set are available.
     const target = b.standardTargetOptions(.{});
-    // For libraries, optimization is typically handled by the consumer
-    // It's also possible to define more custom flags to toggle optional features
-    // of this build script using `b.option()`. All defined flags (including
-    // target and optimize options) will be listed when running `zig build --help`
-    // in this directory.
+    const optimize = b.standardOptimizeOption(.{});
 
-    // This creates a module, which represents a collection of source files alongside
-    // some compilation options, such as optimization mode and linked system libraries.
-    // Zig modules are the preferred way of making Zig code available to consumers.
-    // addModule defines a module that we intend to make available for importing
-    // to our consumers. We must give it a name because a Zig package can expose
-    // multiple modules and consumers will need to be able to specify which
-    // module they want to access.
-    const mod = b.addModule("color_lib", .{
-        // The root source file is the "entry point" of this module. Users of
-        // this module will only be able to access public declarations contained
-        // in this file, which means that if you have declarations that you
-        // intend to expose to consumers that were defined in other files part
-        // of this module, you will have to make sure to re-export them from
-        // the root file.
+    // Create a module that can be imported by other projects
+    const color_module = b.addModule("zig-color", .{
         .root_source_file = b.path("src/root.zig"),
-        // Later on we'll use this module as the root module of a test executable
-        // which requires us to specify a target.
         .target = target,
     });
 
-    // Creates a test executable that will run `test` blocks from the module.
-    const mod_tests = b.addTest(.{
-        .root_module = mod,
+    // Example executable to demonstrate usage
+    const example = b.addExecutable(.{
+        .name = "color-example",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("example/main.zig"),
+            .target = target,
+            .optimize = optimize,
+            .imports = &.{
+                .{ .name = "zig-color", .module = color_module },
+            },
+        }),
     });
 
-    // A run step that will run the test executable.
-    const run_mod_tests = b.addRunArtifact(mod_tests);
+    const example_install = b.addInstallArtifact(example, .{});
+    const example_step = b.step("example", "Build and install the example");
+    example_step.dependOn(&example_install.step);
 
-    // A top level step for running all tests.
-    const test_step = b.step("test", "Run library tests");
-    test_step.dependOn(&run_mod_tests.step);
+    // Unit tests
+    const unit_tests = b.addTest(.{
+        .root_module = color_module,
+    });
+
+    const run_unit_tests = b.addRunArtifact(unit_tests);
+    const test_step = b.step("test", "Run unit tests");
+    test_step.dependOn(&run_unit_tests.step);
+
+    // Documentation generation
+    const docs_step = b.step("docs", "Generate documentation");
+    const docs_obj = b.addObject(.{
+        .name = "zig-color-docs",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/root.zig"),
+            .target = target,
+            .optimize = optimize,
+        }),
+    });
+    const install_docs = b.addInstallDirectory(.{
+        .source_dir = docs_obj.getEmittedDocs(),
+        .install_dir = .prefix,
+        .install_subdir = "docs",
+    });
+    docs_step.dependOn(&install_docs.step);
 
     // Just like flags, top level steps are also listed in the `--help` menu.
     //
