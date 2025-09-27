@@ -202,19 +202,7 @@ zig build docs
 
 Running the included example produces output like this:
 
-```
-Direct red text        # (in red)
-Direct bold text       # (in bold)
-Always red text        # (in red)
-Always green text      # (in green)
-Color support is enabled!
-Smart blue text        # (in blue, or plain if colors disabled)
-This is printed red: 42         # (in red)
-This is printed green: Hello!   # (in green)
-This is printed bold: 3.14      # (in bold)
-Bold Red Text          # (in bold red)
-Underlined Cyan Text   # (underlined cyan)
-```
+![screen-shot](./screen-shot.png)
 
 ## API Reference
 
@@ -252,5 +240,5 @@ Apache 2.0 - see [LICENSE](LICENSE) file for details.
 
 Contributions are welcome! Please feel free to submit issues and pull requests.
 
-###### dpw | 2025.09.23
+###### dpw | 2025.09.27
 
