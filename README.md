@@ -1,12 +1,18 @@
 # Zig Color Library
 
+[![CI](https://github.com/darrylwest/zig-color-lib/workflows/CI/badge.svg)](https://github.com/darrylwest/zig-color-lib/actions/workflows/ci.yml)
+[![Security](https://github.com/darrylwest/zig-color-lib/workflows/Security/badge.svg)](https://github.com/darrylwest/zig-color-lib/actions/workflows/security.yml)
+[![Release](https://github.com/darrylwest/zig-color-lib/workflows/Release/badge.svg)](https://github.com/darrylwest/zig-color-lib/actions/workflows/release.yml)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Zig](https://img.shields.io/badge/zig-0.15.1+-orange.svg)](https://ziglang.org/download/)
+
 ```
- ______          ____      _              _     _ _     
-|__  (_) __ _   / ___|___ | | ___  _ __  | |   (_) |__  
-  / /| |/ _` | | |   / _ \| |/ _ \| '__| | |   | | '_ \ 
+ ______          ____      _              _     _ _
+|__  (_) __ _   / ___|___ | | ___  _ __  | |   (_) |__
+  / /| |/ _` | | |   / _ \| |/ _ \| '__| | |   | | '_ \
  / /_| | (_| | | |__| (_) | | (_) | |    | |___| | |_) |
-/____|_|\__, |  \____\___/|_|\___/|_|    |_____|_|_.__/ 
-        |___/                                           
+/____|_|\__, |  \____\___/|_|\___/|_|    |_____|_|_.__/
+        |___/
 ```
 
 A simple, efficient ANSI color library for Zig console applications. This library provides easy-to-use functions for adding colors and text formatting to terminal output with intelligent color support detection.
